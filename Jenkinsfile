@@ -16,7 +16,7 @@ pipeline {
             }
 
             steps {
-                // sh 'sudo npm cache clean --force '
+                sh 'sudo npm cache clean --force '
                 sh 'ls -lah'
                 sh "sudo chown -R 115:122 '/.npm"
                 sh 'npm i'
