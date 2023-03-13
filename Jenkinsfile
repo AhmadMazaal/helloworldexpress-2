@@ -27,7 +27,7 @@ pipeline {
 
         stage('Running Tests') {
             steps {
-                sh 'node app.js &&'
+                sh 'node app.js'
                 sh 'curl localhost:3000/'
                 sh 'curl localhost:3000/success'
             }
