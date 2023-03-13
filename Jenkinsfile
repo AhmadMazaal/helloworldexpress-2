@@ -6,7 +6,7 @@ pipeline {
     }
     agent any
     tools {
-        nodejs "nodejs"
+        nodejs "NodeJs"
     }
 
     stages{
@@ -36,17 +36,11 @@ pipeline {
             }
         }
 
-        // stage('Running Tests') {
-        //     steps {
-        //         sh 'node app.js'
-        //         sh 'curl localhost:3000/'
-        //         sh 'curl localhost:3000/success'
-        //     }
-        // }
-
-        stage('Test') { 
+        stage('Running Tests') {
             steps {
-                sh './jenkins/scripts/test.sh' 
+                sh 'node app.js'
+                sh 'curl localhost:3000/'
+                sh 'curl localhost:3000/success'
             }
         }
 
