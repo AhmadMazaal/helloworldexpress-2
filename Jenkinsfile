@@ -28,13 +28,13 @@ pipeline {
             }
         }
 
-        stage('Running Tests') {
-            steps {
-                sh 'node app.js'
-                sh 'curl localhost:3000/'
-                sh 'curl localhost:3000/success'
-            }
-        }
+        // stage('Running Tests') {
+        //     steps {
+        //         sh 'node app.js'
+        //         sh 'curl localhost:3000/'
+        //         sh 'curl localhost:3000/success'
+        //     }
+        // }
     
 
         stage('Building Docker Image') {
@@ -42,6 +42,12 @@ pipeline {
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
+            }
+
+               steps {
+                sh 'node app.js'
+                sh 'curl localhost:3000/'
+                sh 'curl localhost:3000/success'
             }
         }
 
