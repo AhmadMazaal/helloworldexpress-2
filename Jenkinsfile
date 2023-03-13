@@ -24,6 +24,14 @@ pipeline {
                 sh 'ls -lah'
             }
         }
+
+        stage('Running Tests') {
+            steps {
+                sh 'node app.js &&'
+                sh 'curl localhost:3000/'
+                sh 'curl localhost:3000/success'
+            }
+        }
     
 
         stage('Building Docker Image') {
@@ -31,14 +39,6 @@ pipeline {
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
-            }
-        }
-
-        stage('Running Tests') {
-            steps {
-                sh 'node app.js &&'
-                sh 'curl localhost:3000/'
-                sh 'curl localhost:3000/success'
             }
         }
 
