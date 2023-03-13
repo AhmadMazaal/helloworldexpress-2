@@ -17,7 +17,7 @@ pipeline {
 
             steps {
                 // sh "chown -R 115:122 /.npm"
-                sh "chown -R 1010:1010 '/home/storm/.npm'"
+                sh "chown -R 1010:1010 /home/storm/.npm"
                 sh 'npm cache clean --force'
                 sh 'ls -lah'
                 // sh "chown -R 115:122 /.npm"
