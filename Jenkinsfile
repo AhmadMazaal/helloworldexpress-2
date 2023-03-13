@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registry = "ahmadhmazaal1997/sl-capstone"
-        registryCredential = 'b59e5233-1bd5-40ab-9439-c9f3e7e636c6'
+        registryCredential = 'cc5b88c4-198a-4900-8de7-0fccf3436eaa'
         dockerImage = ''
     }
     agent any
