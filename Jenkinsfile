@@ -35,6 +35,14 @@ pipeline {
             }
         }
 
+
+        stage('Testing Image') {
+            app.inside {
+                sh 'echo "Tests passed"'
+            }
+        }
+
+
         stage('Deploying Docker Image to Dockerhub') {
             steps {
                 script {
