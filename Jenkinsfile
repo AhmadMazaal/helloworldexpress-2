@@ -7,7 +7,7 @@ pipeline {
     agent any
     
     stages{
-         stage('Build') {
+         stage('Build & Clone Github Repo') {
             agent {
                 docker {
                     image 'node:18.12.1-alpine'
@@ -20,7 +20,6 @@ pipeline {
                 // sh "chown -R 1010:1010 /home/storm/.npm"
                 // sh "chown -R 115:122 /.npm"
                 sh 'npm cache clean --force'
-                sh 'ls -lah'
                 sh 'npm i'
                 sh 'ls -lah'
             }
@@ -45,6 +44,15 @@ pipeline {
                 }
             }
         }
+
+        // stage('Run Image On Instance') {
+        //     steps {
+        //         script {
+        //             dockerImage.run(['-e your_variable=X'])
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Cleaning Up') {
             steps{
