@@ -42,13 +42,13 @@ pipeline {
                     final String baseUrl = "curl localhost:3000"
                     final String successStatusCode = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/success', returnStdout: true).trim()
                     echo '*** successStatusCode ***:' + successStatusCode
-                    // if (successStatusCode.equals("200")) {
-                    //         sh 'pkill -f "node app.js"'
-                    // }
                     final String failResponseStatusCode = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/error', returnStdout: true).trim()
                     final String notFoundResponseStatusCode = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/NOT_FOUND', returnStdout: true).trim()
                     echo '*** failResponseStatusCode *** : ' + failResponseStatusCode
                     echo '*** notFoundResponseStatusCode *** : ' + notFoundResponseStatusCode
+                    if (failResponseStatusCode.equals("500") || notFoundResponseStatusCode.equals("404") ) {
+                            sh 'pkill -f "node app.js"'
+                    }
                 }
             }
         }
