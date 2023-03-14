@@ -40,11 +40,9 @@ pipeline {
                 sh 'node app.js &'
                 script {
                     final String baseUrl = "curl localhost:3000"
-
-                    // final String successResponse = sh(script: "curl -s $baseUrl/success", returnStdout: true).trim()
                     final String successStatusCode = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/success', returnStdout: true).trim()
                     final String failResponse = sh(script: "curl -s $baseUrl/asdasdas", returnStdout: true).trim()
-                    if (successStatusCode == 200) {
+                    if (successStatusCode.equals("200")) {
                             echo 'entered if'
                             sh 'pkill -f "node app.js"'
                             echo 'killed node'
