@@ -36,16 +36,15 @@ pipeline {
 
         stage('Running Tests') {
             steps {
-                // if curl --fail -X POST -d@myfile.txt server-URL; then
-                //     # …(success)
-                // else
-                //     # …(failure)
-                // fi;
                 sh 'npm i'
                 sh 'node app.js &'
                 script {
-                    def successResponse = sh(script: 'curl localhost:3000/success', returnStdout: true)
-                    echo '***successResponse**: ' + response
+                    // def successResponse = sh(script: 'curl localhost:3000/success', returnStdout: true)
+                    // echo '***successResponse**: ' + response
+                    final String url = "curl localhost:3000/success"
+                    final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+
+                    echo response
                 }
                 sh 'curl localhost:3000/'
                 sh 'curl localhost:3000/success'
