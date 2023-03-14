@@ -45,7 +45,9 @@ pipeline {
                     final String successStatusCode = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/success', returnStdout: true).trim()
                     final String failResponse = sh(script: "curl -s $baseUrl/asdasdas", returnStdout: true).trim()
                     if (successStatusCode == 200) {
+                            echo 'entered if'
                             sh 'pkill -f "node app.js"'
+                            echo 'killed node'
                     }
                     echo '*** successStatusCode ***:' + successStatusCode
                     echo '*** failResponse *** : ' + failResponse
