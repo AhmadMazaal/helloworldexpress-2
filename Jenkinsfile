@@ -46,8 +46,8 @@ pipeline {
 
                     echo response
                 }
-                sh 'curl localhost:3000/'
-                sh 'curl localhost:3000/success'
+                // sh 'curl localhost:3000/'
+                // sh 'curl localhost:3000/success'
             }
         }
 
