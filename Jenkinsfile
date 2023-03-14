@@ -20,8 +20,6 @@ pipeline {
             }
 
             steps {
-                // sh "chown -R 1010:1010 /home/storm/.npm"
-                // sh "chown -R 115:122 /.npm"
                 sh 'npm cache clean --force'
                 sh 'npm i'
                 sh 'ls -lah'
@@ -38,8 +36,16 @@ pipeline {
 
         stage('Running Tests') {
             steps {
+                // if curl --fail -X POST -d@myfile.txt server-URL; then
+                //     # …(success)
+                // else
+                //     # …(failure)
+                // fi;
                 sh 'npm i'
                 sh 'node app.js &'
+                
+                def successResponse = sh(script: 'curl localhost:3000/success', returnStdout: true)
+                echo '***successResponse**: ' + response
                 sh 'curl localhost:3000/'
                 sh 'curl localhost:3000/success'
             }
@@ -54,15 +60,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('Run Image On Instance') {
-        //     steps {
-        //         script {
-        //             dockerImage.run(['-e your_variable=X'])
-        //             }
-        //         }
-        //     }
-        // }
 
         stage('Cleaning Up') {
             steps{
