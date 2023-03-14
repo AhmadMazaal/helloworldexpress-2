@@ -43,9 +43,10 @@ pipeline {
                 // fi;
                 sh 'npm i'
                 sh 'node app.js &'
-                
-                def successResponse = sh(script: 'curl localhost:3000/success', returnStdout: true)
-                echo '***successResponse**: ' + response
+                script {
+                    def successResponse = sh(script: 'curl localhost:3000/success', returnStdout: true)
+                    echo '***successResponse**: ' + response
+                }
                 sh 'curl localhost:3000/'
                 sh 'curl localhost:3000/success'
             }
