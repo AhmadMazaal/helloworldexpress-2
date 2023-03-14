@@ -46,8 +46,8 @@ pipeline {
                     final String successResponse = sh(script: "curl -s $baseUrl/success", returnStdout: true).trim()
                     final String failResponse = sh(script: "curl -s $baseUrl/asdasdas", returnStdout: true).trim()
 
-                    echo successResponse
-                    echo failResponse
+                    echo '*** successResponse ***:' + successResponse
+                    echo '*** failResponse *** : ' + failResponse
                 }
                 // sh 'curl localhost:3000/'
                 // sh 'curl localhost:3000/success'
