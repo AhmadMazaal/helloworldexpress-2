@@ -4,15 +4,22 @@ const port = 3000
 
 app.get(
     '/',
-    (req, res) => {
+    (_, res) => {
         res.send('<h1>Submission for capstone project</h1>')
     }
 )
 
 app.get(
     '/success',
-    (req, res) => {
+    (_, res) => {
         res.send('<h1>Submitted successfully!</h1>')
+    }
+)
+
+app.get(
+    '/error',
+    (_, res) => {
+        res.status(500).send('<h1>Sever down response</h1>')
     }
 )
 
