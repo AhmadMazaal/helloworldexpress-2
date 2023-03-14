@@ -42,12 +42,12 @@ pipeline {
                     final String baseUrl = "curl localhost:3000"
 
                     // final String successResponse = sh(script: "curl -s $baseUrl/success", returnStdout: true).trim()
-                    final String successResponse = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/success', returnStdout: true).trim()
+                    final String successStatusCode = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/success', returnStdout: true).trim()
                     final String failResponse = sh(script: "curl -s $baseUrl/asdasdas", returnStdout: true).trim()
-                    // if (successResponse.contains("Success!")) {
-                    //         sh 'pkill -f "node app.js"'
-                    // }
-                    echo '*** successResponse ***:' + successResponse
+                    if (successStatusCode == 200) {
+                            sh 'pkill -f "node app.js"'
+                    }
+                    echo '*** successStatusCode ***:' + successStatusCode
                     echo '*** failResponse *** : ' + failResponse
                 }
             }
