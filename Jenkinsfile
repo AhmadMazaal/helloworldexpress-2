@@ -46,9 +46,11 @@ pipeline {
                     final String notFoundResponseStatusCode = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/NOT_FOUND', returnStdout: true).trim()
                     echo '*** failResponseStatusCode *** : ' + failResponseStatusCode
                     echo '*** notFoundResponseStatusCode *** : ' + notFoundResponseStatusCode
-                    if (failResponseStatusCode.equals("500") || notFoundResponseStatusCode.equals("404") ) {
-                            sh 'pkill -f "node app.js"'
-                    }
+                    // if (failResponseStatusCode.equals("500") || notFoundResponseStatusCode.equals("404") ) {
+                    //         echo 'Killing node server...'
+                    //         sh 'pkill -f "node app.js"'
+                    //         echo 'Server killed successfully...'
+                    // }
                 }
             }
         }
