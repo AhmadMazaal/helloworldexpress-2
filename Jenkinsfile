@@ -39,18 +39,17 @@ pipeline {
                 sh 'npm i'
                 sh 'node app.js &'
                 script {
-                    // def successResponse = sh(script: 'curl localhost:3000/success', returnStdout: true)
-                    // echo '***successResponse**: ' + response
                     final String baseUrl = "curl localhost:3000"
 
-                    final String successResponse = sh(script: "curl -s $baseUrl/success", returnStdout: true).trim()
+                    // final String successResponse = sh(script: "curl -s $baseUrl/success", returnStdout: true).trim()
+                    final String successResponse = sh(script: 'curl -s -o /dev/null -w "%{http_code}" localhost:3000/success', returnStdout: true).trim()
                     final String failResponse = sh(script: "curl -s $baseUrl/asdasdas", returnStdout: true).trim()
-
+                    // if (successResponse.contains("Success!")) {
+                    //         sh 'pkill -f "node app.js"'
+                    // }
                     echo '*** successResponse ***:' + successResponse
                     echo '*** failResponse *** : ' + failResponse
                 }
-                // sh 'curl localhost:3000/'
-                // sh 'curl localhost:3000/success'
             }
         }
 
