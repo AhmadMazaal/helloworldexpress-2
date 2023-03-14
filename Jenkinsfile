@@ -41,10 +41,13 @@ pipeline {
                 script {
                     // def successResponse = sh(script: 'curl localhost:3000/success', returnStdout: true)
                     // echo '***successResponse**: ' + response
-                    final String url = "curl localhost:3000/success"
-                    final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+                    final String baseUrl = "curl localhost:3000"
 
-                    echo response
+                    final String successResponse = sh(script: "curl -s $successUrl/success", returnStdout: true).trim()
+                    final String failResponse = sh(script: "curl -s $successUrl/asdasdas", returnStdout: true).trim()
+
+                    echo successResponse
+                    echo failResponse
                 }
                 // sh 'curl localhost:3000/'
                 // sh 'curl localhost:3000/success'
